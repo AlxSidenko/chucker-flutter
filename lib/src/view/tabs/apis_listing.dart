@@ -46,6 +46,7 @@ class _ApisListingTabViewState extends State<ApisListingTabView> {
       itemBuilder: (_, i) {
         final api = widget.apis[i];
         return ApisListingItemWidget(
+          api: api,
           baseUrl: api.baseUrl,
           dateTime: api.requestTime,
           method: api.method,

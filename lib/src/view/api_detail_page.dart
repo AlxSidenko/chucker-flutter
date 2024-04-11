@@ -33,6 +33,7 @@ class _ApiDetailsPageState extends State<ApiDetailsPage> {
     return Directionality(
       textDirection: Localization.textDirection,
       child: Scaffold(
+       backgroundColor: Colors.grey[200],
         appBar: ChuckerAppBar(
           onBackPressed: () => context.navigator.pop(),
           actions: [

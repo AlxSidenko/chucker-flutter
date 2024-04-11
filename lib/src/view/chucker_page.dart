@@ -56,6 +56,7 @@ class _ChuckerPageState extends State<ChuckerPage> {
   @override
   Widget build(_) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: ChuckerAppBar(
         onBackPressed: () => ChuckerFlutter.navigatorObserver.navigator?.pop(),
         actions: [
@@ -98,17 +99,17 @@ class _ChuckerPageState extends State<ChuckerPage> {
                     StatsTile(
                       stats: _successApis(filterApply: false).length.toString(),
                       title: Localization.strings['successRequest']!,
-                      backColor: Colors.greenAccent[400]!,
+                      backColor: Colors.greenAccent[100]!,
                     ),
                     StatsTile(
                       stats: _failedApis(filterApply: false).length.toString(),
                       title: Localization.strings['failedRequests']!,
-                      backColor: Colors.amber[300]!,
+                      backColor: Colors.amber[100]!,
                     ),
                     StatsTile(
                       stats: _remaingRequests.toString(),
                       title: Localization.strings['remainingRequests']!,
-                      backColor: Colors.deepOrange[400]!,
+                      backColor: Colors.deepOrange[100]!,
                     ),
                   ],
                 ),

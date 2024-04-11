@@ -247,4 +247,25 @@ $prettyJson''';
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
   int get hashCode => requestTime.millisecondsSinceEpoch;
+
+  String toCurlCommand() {
+    // Constructing the cURL command
+    var curlCommand = 'curl -X $method "$baseUrl$path" \\\n';
+
+    // Adding headers to the cURL command
+    if (headers.isNotEmpty) {
+      final headersJson = jsonDecode(headers) as Map<String, String>;
+      headersJson.forEach((key, value) {
+        curlCommand += '  -H "$key: $value" \\\n';
+      });
+    }
+
+    // Adding request body to the cURL command if it exists
+    if (body.runtimeType == Map) {
+      final requestBody = json.encode(body);
+      curlCommand += '  --data \'$requestBody\'';
+    }
+
+    return curlCommand;
+  }
 }

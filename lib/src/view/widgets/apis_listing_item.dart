@@ -4,6 +4,7 @@ import 'package:chucker_flutter/src/localization/localization.dart';
 import 'package:chucker_flutter/src/models/api_response.dart';
 import 'package:chucker_flutter/src/view/helper/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 ///[ApisListingItemWidget] renders the [ApiResponse] items in
 ///`ApisListingTabView`
@@ -11,6 +12,7 @@ class ApisListingItemWidget extends StatelessWidget {
   ///[ApisListingItemWidget] renders the [ApiResponse] items in
   ///1ApisListingTabView`
   const ApisListingItemWidget({
+    required this.api,
     required this.baseUrl,
     required this.dateTime,
     required this.method,
@@ -23,6 +25,9 @@ class ApisListingItemWidget extends StatelessWidget {
     required this.onPressed,
     Key? key,
   }) : super(key: key);
+
+  //all api data
+  final ApiResponse api;
 
   ///base url of api request such as `https://www.api.com`
   final String baseUrl;
@@ -89,6 +94,15 @@ class ApisListingItemWidget extends StatelessWidget {
                             context.textTheme.bodySmall!.withColor(Colors.red),
                       ),
                     ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      final curlCommand = api.toCurlCommand();
+                      Clipboard.setData(
+                        ClipboardData(text: curlCommand),
+                      );
+                    },
+                    icon: const Icon(Icons.copy),
                   ),
                 ],
               ),
