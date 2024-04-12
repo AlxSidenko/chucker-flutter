@@ -43,8 +43,7 @@ class _ChuckerPageState extends State<ChuckerPage> {
 
   Future<void> _init() async {
     final sharedPreferencesManager = SharedPreferencesManager.getInstance();
-    _apis = [ApiResponse.mock()];
-    await sharedPreferencesManager.getAllApiResponses();
+    _apis = await sharedPreferencesManager.getAllApiResponses();
     setState(() {});
   }
 
