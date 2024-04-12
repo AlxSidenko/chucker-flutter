@@ -97,7 +97,7 @@ class ApisListingItemWidget extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () {
-                      final curlCommand = api.toCurlCommand();
+                      final curlCommand = api.toCurl();
                       Clipboard.setData(
                         ClipboardData(text: curlCommand),
                       );
