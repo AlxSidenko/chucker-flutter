@@ -248,14 +248,23 @@ $prettyJson''';
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
   int get hashCode => requestTime.millisecondsSinceEpoch;
 
-  String toCurlCommand() {
+  String getCurl() {
     // Constructing the cURL command
     var curlCommand = 'curl -X $method "$baseUrl$path" \\\n';
 
     // Adding headers to the cURL command
     if (headers.isNotEmpty) {
-      final headersJson = jsonDecode(headers) as Map<String, String>;
-      headersJson.forEach((key, value) {
+      List<String> pairs = headers.replaceAll(RegExp(r'[{}]+'), '').split(', ');
+
+      Map<String, String> jsonMap = {};
+
+      for (String pair in pairs) {
+        List<String> keyValue = pair.split(': ');
+
+        jsonMap[keyValue[0]] = keyValue[1];
+      }
+
+      jsonMap.forEach((key, value) {
         curlCommand += '  -H "$key: $value" \\\n';
       });
     }

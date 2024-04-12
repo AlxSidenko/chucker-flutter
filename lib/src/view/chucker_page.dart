@@ -33,17 +33,18 @@ class _ChuckerPageState extends State<ChuckerPage> {
   final _tabsHeadings = [
     _TabModel(
       label: Localization.strings['successRequestsWithSpace']!,
-      icon: const Icon(Icons.check_circle, color: Colors.white),
+      icon: const Icon(Icons.check_circle, color: textMain),
     ),
     _TabModel(
       label: Localization.strings['failedRequestsWithSpace']!,
-      icon: const Icon(Icons.error, color: Colors.white),
+      icon: const Icon(Icons.error, color: textMain),
     ),
   ];
 
   Future<void> _init() async {
     final sharedPreferencesManager = SharedPreferencesManager.getInstance();
-    _apis = await sharedPreferencesManager.getAllApiResponses();
+    _apis = [ApiResponse.mock()];
+    await sharedPreferencesManager.getAllApiResponses();
     setState(() {});
   }
 
@@ -56,14 +57,14 @@ class _ChuckerPageState extends State<ChuckerPage> {
   @override
   Widget build(_) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: background,
       appBar: ChuckerAppBar(
         onBackPressed: () => ChuckerFlutter.navigatorObserver.navigator?.pop(),
         actions: [
           Theme(
             data: ThemeData(
               checkboxTheme: const CheckboxThemeData(
-                side: BorderSide(color: Colors.white),
+                side: BorderSide(color: border),
               ),
             ),
             child: Checkbox(
@@ -128,8 +129,9 @@ class _ChuckerPageState extends State<ChuckerPage> {
             ),
             const SizedBox(height: 16),
             Material(
-              color: primaryColor,
+              color: darkCell,
               child: TabBar(
+                labelColor: textMain,
                 tabs: _tabsHeadings
                     .map(
                       (e) => Tab(text: e.label, icon: e.icon),

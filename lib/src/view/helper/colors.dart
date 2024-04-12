@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 
 ///main color used for `chucker_flutter`
-const primaryColor = Color.fromARGB(255, 125, 125, 125);
+const primaryColor = const Color(0xFF0D0F0F);
+const background = Colors.white;
+const border = const Color(0xFF3A75C2);
 
 ///secondary color used in UI
-const secondaryColor = Color.fromARGB(255, 110, 108, 108);
+const darkCell = const Color(0xFFFAFAFA);
+
+const textMain = const Color(0xFF333333);
 
 ///Render background color with respect to api status code
 Color statusColor(int statusCode) {
   if (statusCode > 199 && statusCode < 300) {
-    return Color.fromARGB(255, 179, 236, 181);
+    return Color.fromARGB(255, 133, 214, 135);
   } else if (statusCode > 399 && statusCode < 500) {
     return const Color.fromARGB(255, 243, 156, 150);
   } else if (statusCode > 499 && statusCode < 600) {

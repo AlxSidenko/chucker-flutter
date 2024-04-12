@@ -28,13 +28,13 @@ class _ChuckerAppBarState extends State<ChuckerAppBar> {
   @override
   Widget build(BuildContext _) {
     return AppBar(
-      backgroundColor: primaryColor,
+      backgroundColor: background,
       title: Text(
         'Chucker Flutter',
         style: Theme.of(context)
             .textTheme
             .headlineSmall!
-            .copyWith(color: Colors.white),
+            .copyWith(color: textMain),
       ),
       leading: IconButton(
         key: const ValueKey('chucker_back_button'),

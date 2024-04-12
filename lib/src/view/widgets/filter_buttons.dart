@@ -71,7 +71,7 @@ class _FilterButtonsState extends State<FilterButtons> {
                   ? Localization.strings['showSearch']!
                   : Localization.strings['hideSearch']!,
               onPressed: () => setState(() => _openSearch = !_openSearch),
-              foreColor: Colors.white,
+              backColor: darkCell,
             ),
           ),
         ],
@@ -115,16 +115,24 @@ class _SearchField extends StatelessWidget {
         ),
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.symmetric(horizontal: 8),
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: border,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: border,
+          ),
+        ),
         border: OutlineInputBorder(
           borderSide: BorderSide(
-            color: primaryColor,
-            width: 2,
+            color: border,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: primaryColor,
-            width: 2,
+            color: border,
           ),
         ),
         hintText: 'Base url, status code, date',
