@@ -271,7 +271,7 @@ $prettyJson''';
 
     // Adding request body to the cURL command if it exists
     if (request != null) {
-      final requestBody = json.encode(body);
+      final requestBody = json.encode(request);
       curlCommand += '  --data \'$requestBody\'';
     }
 
