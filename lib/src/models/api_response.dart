@@ -270,7 +270,7 @@ $prettyJson''';
     }
 
     // Adding request body to the cURL command if it exists
-    if (body.runtimeType == Map) {
+    if (request != null) {
       final requestBody = json.encode(body);
       curlCommand += '  --data \'$requestBody\'';
     }
