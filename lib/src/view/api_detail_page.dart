@@ -33,13 +33,13 @@ class _ApiDetailsPageState extends State<ApiDetailsPage> {
     return Directionality(
       textDirection: Localization.textDirection,
       child: Scaffold(
-       backgroundColor: Colors.grey[200],
+        backgroundColor: Colors.white,
         appBar: ChuckerAppBar(
           onBackPressed: () => context.navigator.pop(),
           actions: [
             IconButton(
               onPressed: () {
-                Clipboard.setData(ClipboardData(text: widget.api.toString()));
+                Clipboard.setData(ClipboardData(text: widget.api.getCurl()));
               },
               icon: const Icon(Icons.copy),
             ),
@@ -47,7 +47,10 @@ class _ApiDetailsPageState extends State<ApiDetailsPage> {
               onPressed: () {
                 Share.share(widget.api.toString());
               },
-              icon: const Icon(Icons.share),
+              icon: const Icon(
+                Icons.share,
+                color: Colors.black,
+              ),
             ),
           ],
         ),
@@ -57,10 +60,10 @@ class _ApiDetailsPageState extends State<ApiDetailsPage> {
             child: Column(
               children: [
                 Material(
-                  color: primaryColor,
+                  color: darkCell,
                   child: TabBar(
-                    labelColor: Colors.white,
-                    unselectedLabelColor: Colors.white.withOpacity(0.8),
+                    labelColor: primaryColor,
+                    unselectedLabelColor: textMain,
                     tabs: [
                       Tab(text: Localization.strings['overview']),
                       Tab(text: Localization.strings['request']),
@@ -197,10 +200,10 @@ class _ResponseTab extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: secondaryColor,
+            color: darkCell,
             boxShadow: [
               BoxShadow(
-                color: secondaryColor.withOpacity(0.3),
+                color: darkCell.withOpacity(0.3),
                 spreadRadius: 2,
                 blurRadius: 7,
                 offset: const Offset(0, 8),
@@ -265,10 +268,10 @@ class _RequestTab extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: secondaryColor,
+            color: darkCell,
             boxShadow: [
               BoxShadow(
-                color: secondaryColor.withOpacity(0.3),
+                color: darkCell.withOpacity(0.3),
                 spreadRadius: 2,
                 blurRadius: 7,
                 offset: const Offset(0, 8),

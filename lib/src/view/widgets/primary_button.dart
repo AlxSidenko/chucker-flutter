@@ -36,11 +36,11 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: backColor ?? primaryColor,
+          backgroundColor: backColor ?? background,
         ),
         child: Text(
           text,
-          style: context.textTheme.bodyLarge!.copyWith(color: foreColor),
+          style: context.textTheme.bodyLarge!.copyWith(color: textMain),
         ),
       ),
     );

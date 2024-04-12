@@ -1,4 +1,5 @@
 import 'package:chucker_flutter/src/helpers/extensions.dart';
+import 'package:chucker_flutter/src/view/helper/colors.dart';
 import 'package:flutter/material.dart';
 
 ///Shows statistics of api requests as summary
@@ -31,13 +32,15 @@ class StatsTile extends StatelessWidget {
             Text(
               stats,
               textAlign: TextAlign.center,
-              style: context.textTheme.headlineSmall!.toBold(),
+              style: context.textTheme.headlineSmall!
+                  .copyWith(color: textMain, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 8),
             Text(
               title,
               textAlign: TextAlign.center,
-              style: context.textTheme.bodySmall!.toBold(),
+              style: context.textTheme.bodySmall!
+                  .copyWith(color: textMain, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 16),
           ],

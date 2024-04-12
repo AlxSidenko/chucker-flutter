@@ -28,7 +28,7 @@ class OverviewTabView extends StatelessWidget {
         columnWidths: const {0: FixedColumnWidth(100)},
         children: [
           TableRow(
-            decoration: BoxDecoration(color: Colors.grey[300]),
+            decoration: BoxDecoration(color: darkCell),
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),

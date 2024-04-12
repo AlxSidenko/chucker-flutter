@@ -79,7 +79,7 @@ class ApisListingItemWidget extends StatelessWidget {
                       statusCode.toString(),
                       textAlign: TextAlign.center,
                       style: context.textTheme.bodySmall!.withColor(
-                        Colors.white,
+                        textMain,
                       ),
                     ),
                   ),
@@ -90,16 +90,16 @@ class ApisListingItemWidget extends StatelessWidget {
                       onPressed: () => onDelete(dateTime.toString()),
                       child: Text(
                         Localization.strings['delete']!,
-                        style:
-                            context.textTheme.bodySmall!.withColor(Colors.red),
+                        style: context.textTheme.bodySmall!
+                            .withColor(Colors.red)
+                            .copyWith(fontSize: 11),
                       ),
                     ),
                   ),
                   IconButton(
                     onPressed: () {
-                      final curlCommand = api.toCurl();
                       Clipboard.setData(
-                        ClipboardData(text: curlCommand),
+                        ClipboardData(text: api.getCurl()),
                       );
                     },
                     icon: const Icon(Icons.copy),
@@ -124,26 +124,34 @@ class ApisListingItemWidget extends StatelessWidget {
                         ),
                       ),
                       const Expanded(child: SizedBox.shrink()),
-                      Checkbox(
-                        value: checked,
-                        activeColor: Colors.green,
-                        onChanged: (_) => onChecked(dateTime.toString()),
+                      Theme(
+                        data: ThemeData(
+                          checkboxTheme: const CheckboxThemeData(
+                            side: BorderSide(color: border),
+                          ),
+                        ),
+                        child: Checkbox(
+                          value: checked,
+                          onChanged: (_) => onChecked(dateTime.toString()),
+                        ),
                       ),
                     ],
                   ),
                   Text(
                     path,
-                    style: context.textTheme.bodySmall!.toBold(),
+                    style: context.textTheme.bodySmall!
+                        .toBold()
+                        .withColor(textMain),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     baseUrl.isEmpty ? Localization.strings['nA']! : baseUrl,
-                    style: context.textTheme.bodySmall!.withColor(Colors.grey),
+                    style: context.textTheme.bodySmall!.withColor(textMain),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     dateTime.toString(),
-                    style: context.textTheme.bodySmall!.withColor(Colors.grey),
+                    style: context.textTheme.bodySmall!.withColor(textMain),
                   ),
                 ],
               ),

@@ -146,7 +146,7 @@ class _NotificationState extends State<Notification>
                       _openDetails();
                     },
                     text: Localization.strings['details']!,
-                    foreColor: Colors.white,
+                    foreColor: textMain,
                   ),
                 ],
               ),

@@ -248,7 +248,7 @@ $prettyJson''';
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
   int get hashCode => requestTime.millisecondsSinceEpoch;
 
-  String toCurl() {
+  String getCurl() {
     // Constructing the cURL command
     var curlCommand = 'curl -X $method "$baseUrl$path" \\\n';
 
