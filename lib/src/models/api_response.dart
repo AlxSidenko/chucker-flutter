@@ -250,7 +250,16 @@ $prettyJson''';
 
   String getCurl() {
     // Constructing the cURL command
-    var curlCommand = 'curl -X $method "$baseUrl$path" \\\n';
+
+    var url = '$baseUrl$path';
+
+    // Adding query parameters to the URL
+    if (queryParameters.isNotEmpty) {
+      final Map<String, dynamic>? queryParams = jsonDecode(queryParameters) as Map<String, dynamic>?;
+      url += '?${Uri(queryParameters:queryParams ).query}';
+    }
+
+    var curlCommand = 'curl -X $method "$url" \\\n';
 
     // Adding headers to the cURL command
     if (headers.isNotEmpty) {
@@ -277,4 +286,5 @@ $prettyJson''';
 
     return curlCommand;
   }
+
 }
