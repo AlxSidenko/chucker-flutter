@@ -250,7 +250,24 @@ $prettyJson''';
 
   String getCurl() {
     // Constructing the cURL command
-    var curlCommand = 'curl -X $method "$baseUrl$path" \\\n';
+
+    var url = '$baseUrl$path';
+
+    // Adding query parameters to the URL
+    if (queryParameters.isNotEmpty) {
+      final Map<String, dynamic>? queryParams = Map.fromEntries(
+        queryParameters
+            .replaceAll(RegExp(r'[\{\}]'), '') // Remove curly braces
+            .split(', ') // Split by comma and space
+            .map((pair) =>
+                pair.split(': ')) // Split each pair by colon and space
+            .map((keyValue) => MapEntry(keyValue[0], keyValue[1])),
+      );
+
+      url += '?${Uri(queryParameters: queryParams).query}';
+    }
+
+    var curlCommand = 'curl -X $method "$url" \\\n';
 
     // Adding headers to the cURL command
     if (headers.isNotEmpty) {
@@ -276,5 +293,14 @@ $prettyJson''';
     }
 
     return curlCommand;
+  }
+
+  Map<String, String> parseQueryString(String queryString) {
+    return Map.fromEntries(queryString
+        .replaceAll(RegExp(r'[\{\}]'), '') // Remove curly braces
+        .split(', ') // Split by comma and space
+        .map((pair) => pair.split(': ')) // Split each pair by colon and space
+        .map((keyValue) => MapEntry(
+            keyValue[0], keyValue[1]))); // Create MapEntry for each pair
   }
 }
