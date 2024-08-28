@@ -261,7 +261,12 @@ $prettyJson''';
             .split(', ') // Split by comma and space
             .map((pair) =>
                 pair.split(': ')) // Split each pair by colon and space
-            .map((keyValue) => MapEntry(keyValue[0], keyValue[1])),
+            .map((keyValue) {
+              if (keyValue.length == 1 && keyValue.first == '') {
+                return const MapEntry('', '');
+              }
+              return MapEntry(keyValue[0], keyValue[1]);
+            }),
       );
 
       url += '?${Uri(queryParameters: queryParams).query}';
