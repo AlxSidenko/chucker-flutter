@@ -35,6 +35,13 @@ class SharedPreferencesManager {
       previousResponses.removeAt(previousResponses.length - 1);
     }
 
+    try {
+      final apiResponseInBytes = utf8.encode(jsonEncode(apiResponse.body)).length;
+      print(apiResponseInBytes);
+    } catch (e) {
+      print(e);
+    }
+
     newResponses
       ..addAll(previousResponses)
       ..add(apiResponse);
