@@ -270,7 +270,8 @@ $prettyJson''';
       );
 
       if (queryParams.entries.length == 1 &&
-          queryParams.entries.first == const MapEntry('', '')) {
+          queryParams.entries.first.key == '' &&
+          queryParams.entries.first.value == '') {
         url += Uri(queryParameters: queryParams).query;
       } else {
         url += '?${Uri(queryParameters: queryParams).query}';
