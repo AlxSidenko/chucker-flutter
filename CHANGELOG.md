@@ -145,3 +145,9 @@
 ## 1.7.0
 * Fix: Some UI issues
 * Chore: Dependencies update
+
+## 1.7.1
+* Chore: Dependencies update
+
+## 1.7.2
+* Readme update

@@ -1,6 +1,6 @@
 name: chucker_flutter
 description: Chucker Flutter helps you inspect the HTTP(S) requests/responses. It stores data locally and provides a UI for inspecting network calls and sharing their content.
-version: 1.7.0
+version: 1.7.2
 repository: https://github.com/syedmurtaza108/chucker-flutter
 issue_tracker: https://github.com/syedmurtaza108/chucker-flutter/issues
 topics: [http, networking, chucker]
@@ -25,7 +25,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  very_good_analysis: ^5.0.0+1
+  very_good_analysis: ^6.0.0
 
 screenshots:
   - description: Chucker Flutter Logo
