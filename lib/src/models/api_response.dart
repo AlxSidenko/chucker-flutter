@@ -255,21 +255,26 @@ $prettyJson''';
 
     // Adding query parameters to the URL
     if (queryParameters.isNotEmpty) {
-      final Map<String, dynamic>? queryParams = Map.fromEntries(
+      final queryParams = Map.fromEntries(
         queryParameters
             .replaceAll(RegExp(r'[\{\}]'), '') // Remove curly braces
             .split(', ') // Split by comma and space
             .map((pair) =>
                 pair.split(': ')) // Split each pair by colon and space
             .map((keyValue) {
-              if (keyValue.length == 1 && keyValue.first == '') {
-                return const MapEntry('', '');
-              }
-              return MapEntry(keyValue[0], keyValue[1]);
-            }),
+          if (keyValue.length == 1 && keyValue.first == '') {
+            return const MapEntry('', '');
+          }
+          return MapEntry(keyValue[0], keyValue[1]);
+        }),
       );
 
-      url += '?${Uri(queryParameters: queryParams).query}';
+      if (queryParams.entries.length == 1 &&
+          queryParams.entries.first == const MapEntry('', '')) {
+        url += Uri(queryParameters: queryParams).query;
+      } else {
+        url += '?${Uri(queryParameters: queryParams).query}';
+      }
     }
 
     var curlCommand = 'curl -X $method "$url" \\\n';

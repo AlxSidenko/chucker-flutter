@@ -44,7 +44,7 @@ class SharedPreferencesManager {
 
     newResponses.addAll(previousResponses);
 
-    if (apiResponseInBytes > 300000) {
+    if (apiResponseInBytes > 80000) {
       newResponses.add(apiResponse.copyWith(body: 'The answer is too big.'));
     } else {
       newResponses.add(apiResponse);
