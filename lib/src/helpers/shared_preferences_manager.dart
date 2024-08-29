@@ -35,16 +35,20 @@ class SharedPreferencesManager {
       previousResponses.removeAt(previousResponses.length - 1);
     }
 
+    int apiResponseInBytes;
     try {
-      final apiResponseInBytes = utf8.encode(jsonEncode(apiResponse.body)).length;
-      print(apiResponseInBytes);
+      apiResponseInBytes = utf8.encode(jsonEncode(apiResponse.body)).length;
     } catch (e) {
-      print(e);
+      apiResponseInBytes = 100;
     }
 
-    newResponses
-      ..addAll(previousResponses)
-      ..add(apiResponse);
+    newResponses.addAll(previousResponses);
+
+    if (apiResponseInBytes > 300000) {
+      newResponses.add(apiResponse.copyWith(body: 'The answer is too big.'));
+    } else {
+      newResponses.add(apiResponse);
+    }
 
     final preferences = await SharedPreferences.getInstance();
     await preferences.setString(
