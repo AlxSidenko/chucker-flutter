@@ -38,8 +38,9 @@ class _ChuckerAppBarState extends State<ChuckerAppBar> {
       ),
       leading: IconButton(
         key: const ValueKey('chucker_back_button'),
-        icon: const Icon(Icons.arrow_back),
+        icon: const Icon(Icons.arrow_back, color: Colors.blueAccent),
         onPressed: widget.onBackPressed,
+        color: Colors.blueGrey,
       ),
       actions: widget.actions,
     );
