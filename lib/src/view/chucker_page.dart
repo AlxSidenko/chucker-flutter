@@ -13,6 +13,9 @@ import 'package:chucker_flutter/src/view/widgets/filter_buttons.dart';
 import 'package:chucker_flutter/src/view/widgets/menu_buttons.dart';
 import 'package:chucker_flutter/src/view/widgets/stats_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:universal_io/io.dart';
+
+bool get isMobilePlatform => Platform.isAndroid || Platform.isIOS;
 
 ///The main screen of `chucker_flutter`
 class ChuckerPage extends StatefulWidget {
@@ -97,15 +100,12 @@ class _ChuckerPageState extends State<ChuckerPage> {
                 child: Row(
                   children: [
                     StatsTile(
-                      stats: _successApis(filterApply: false)
-                          .length
-                          .toString(),
+                      stats: _successApis(filterApply: false).length.toString(),
                       title: Localization.strings['successRequest']!,
                       backColor: Colors.greenAccent[100]!,
                     ),
                     StatsTile(
-                      stats:
-                          _failedApis(filterApply: false).length.toString(),
+                      stats: _failedApis(filterApply: false).length.toString(),
                       title: Localization.strings['failedRequests']!,
                       backColor: Colors.amber[100]!,
                     ),
@@ -118,18 +118,19 @@ class _ChuckerPageState extends State<ChuckerPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
-            FilterButtons(
-              onFilter: (httpMethod) {
-                setState(() => _httpMethod = httpMethod);
-              },
-              onSearch: (query) {
-                setState(() => _query = query);
-              },
-              httpMethod: _httpMethod,
-              query: _query,
-            ),
-            const SizedBox(height: 16),
+            if (!isMobilePlatform) const SizedBox(height: 16),
+            if (!isMobilePlatform)
+              FilterButtons(
+                onFilter: (httpMethod) {
+                  setState(() => _httpMethod = httpMethod);
+                },
+                onSearch: (query) {
+                  setState(() => _query = query);
+                },
+                httpMethod: _httpMethod,
+                query: _query,
+              ),
+            if (!isMobilePlatform) const SizedBox(height: 16),
             Material(
               color: darkCell,
               child: TabBar(
