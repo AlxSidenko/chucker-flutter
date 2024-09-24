@@ -23,6 +23,7 @@ class MenuButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<int>(
+      iconColor: Colors.black,
       onSelected: (value) {
         if (value == 0) {
           onDelete();

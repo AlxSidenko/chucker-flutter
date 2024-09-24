@@ -41,7 +41,10 @@ class _ApiDetailsPageState extends State<ApiDetailsPage> {
               onPressed: () {
                 Clipboard.setData(ClipboardData(text: widget.api.getCurl()));
               },
-              icon: const Icon(Icons.copy),
+              icon: const Icon(
+                Icons.copy,
+                color: Colors.black,
+              ),
             ),
             IconButton(
               onPressed: () {
