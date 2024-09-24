@@ -13,9 +13,6 @@ import 'package:chucker_flutter/src/view/widgets/filter_buttons.dart';
 import 'package:chucker_flutter/src/view/widgets/menu_buttons.dart';
 import 'package:chucker_flutter/src/view/widgets/stats_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:universal_io/io.dart';
-
-bool get isMobilePlatform => Platform.isAndroid || Platform.isIOS;
 
 ///The main screen of `chucker_flutter`
 class ChuckerPage extends StatefulWidget {
@@ -84,96 +81,89 @@ class _ChuckerPageState extends State<ChuckerPage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        physics: isMobilePlatform
-            ? const BouncingScrollPhysics()
-            : const NeverScrollableScrollPhysics(),
-        child: Expanded(
-          child: DefaultTabController(
-            length: 2,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Visibility(
-                  visible: ChuckerUiHelper.settings.showRequestsStats,
-                  child: const SizedBox(height: 16),
-                ),
-                Visibility(
-                  visible: ChuckerUiHelper.settings.showRequestsStats,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      children: [
-                        StatsTile(
-                          stats: _successApis(filterApply: false)
-                              .length
-                              .toString(),
-                          title: Localization.strings['successRequest']!,
-                          backColor: Colors.greenAccent[100]!,
-                        ),
-                        StatsTile(
-                          stats:
-                              _failedApis(filterApply: false).length.toString(),
-                          title: Localization.strings['failedRequests']!,
-                          backColor: Colors.amber[100]!,
-                        ),
-                        StatsTile(
-                          stats: _remaingRequests.toString(),
-                          title: Localization.strings['remainingRequests']!,
-                          backColor: Colors.deepOrange[100]!,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                FilterButtons(
-                  onFilter: (httpMethod) {
-                    setState(() => _httpMethod = httpMethod);
-                  },
-                  onSearch: (query) {
-                    setState(() => _query = query);
-                  },
-                  httpMethod: _httpMethod,
-                  query: _query,
-                ),
-                const SizedBox(height: 16),
-                Material(
-                  color: darkCell,
-                  child: TabBar(
-                    labelColor: textMain,
-                    tabs: _tabsHeadings
-                        .map(
-                          (e) => Tab(text: e.label, icon: e.icon),
-                        )
-                        .toList(),
-                  ),
-                ),
-                Expanded(
-                  child: TabBarView(
-                    key: const Key('apis_tab_bar_view'),
-                    children: [
-                      ApisListingTabView(
-                        apis: _successApis(),
-                        onDelete: _deleteAnApi,
-                        onChecked: _selectAnApi,
-                        showDelete: _selectedApis.isEmpty,
-                        onItemPressed: _openDetails,
-                      ),
-                      ApisListingTabView(
-                        key: const Key('fail_tab_view'),
-                        apis: _failedApis(),
-                        onDelete: _deleteAnApi,
-                        onChecked: _selectAnApi,
-                        showDelete: _selectedApis.isEmpty,
-                        onItemPressed: _openDetails,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+      body: DefaultTabController(
+        length: 2,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Visibility(
+              visible: ChuckerUiHelper.settings.showRequestsStats,
+              child: const SizedBox(height: 16),
             ),
-          ),
+            Visibility(
+              visible: ChuckerUiHelper.settings.showRequestsStats,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  children: [
+                    StatsTile(
+                      stats: _successApis(filterApply: false)
+                          .length
+                          .toString(),
+                      title: Localization.strings['successRequest']!,
+                      backColor: Colors.greenAccent[100]!,
+                    ),
+                    StatsTile(
+                      stats:
+                          _failedApis(filterApply: false).length.toString(),
+                      title: Localization.strings['failedRequests']!,
+                      backColor: Colors.amber[100]!,
+                    ),
+                    StatsTile(
+                      stats: _remaingRequests.toString(),
+                      title: Localization.strings['remainingRequests']!,
+                      backColor: Colors.deepOrange[100]!,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            FilterButtons(
+              onFilter: (httpMethod) {
+                setState(() => _httpMethod = httpMethod);
+              },
+              onSearch: (query) {
+                setState(() => _query = query);
+              },
+              httpMethod: _httpMethod,
+              query: _query,
+            ),
+            const SizedBox(height: 16),
+            Material(
+              color: darkCell,
+              child: TabBar(
+                labelColor: textMain,
+                tabs: _tabsHeadings
+                    .map(
+                      (e) => Tab(text: e.label, icon: e.icon),
+                    )
+                    .toList(),
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                key: const Key('apis_tab_bar_view'),
+                children: [
+                  ApisListingTabView(
+                    apis: _successApis(),
+                    onDelete: _deleteAnApi,
+                    onChecked: _selectAnApi,
+                    showDelete: _selectedApis.isEmpty,
+                    onItemPressed: _openDetails,
+                  ),
+                  ApisListingTabView(
+                    key: const Key('fail_tab_view'),
+                    apis: _failedApis(),
+                    onDelete: _deleteAnApi,
+                    onChecked: _selectAnApi,
+                    showDelete: _selectedApis.isEmpty,
+                    onItemPressed: _openDetails,
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
