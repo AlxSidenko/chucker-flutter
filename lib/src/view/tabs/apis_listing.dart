@@ -43,6 +43,7 @@ class _ApisListingTabViewState extends State<ApisListingTabView> {
       );
     }
     return ListView.separated(
+      shrinkWrap: true,
       itemBuilder: (_, i) {
         final api = widget.apis[i];
         return ApisListingItemWidget(
